@@ -74,7 +74,7 @@ while(1):
 
 
     capture = cv2.cvtColor(capture,cv2.COLOR_BGR2RGB) # instead of reading in image we take a live picture
-    capture = box_capture.reshape((capture.shape[0] * capture.shape[1],3))
+    capture = capture.reshape((capture.shape[0] * capture.shape[1],3))
 
 
     clt = KMeans(n_clusters=3) #cluster number
