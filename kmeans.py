@@ -66,19 +66,19 @@ while(1):
         blue_area = max(bluecnts, key=cv2.contourArea)
         (xg,yg,wg,hg) = cv2.boundingRect(blue_area)
         cv2.rectangle(frame,(xg,yg),(xg+wg, yg+hg),(0,255,0),2)
-        box_capture = frame[yg:yg+hg,xg:xg+wg]
+        capture = frame[yg:yg+hg,xg:xg+wg]
 
     cv2.imshow('frame',frame)
     #cv2.imshow('mask',mask)
     #cv2.imshow('res',res)
 
 
-    box_capture = cv2.cvtColor(box_capture,cv2.COLOR_BGR2RGB)
-    box_capture = box_capture.reshape((box_capture.shape[0] * box_capture.shape[1],3))
+    capture = cv2.cvtColor(capture,cv2.COLOR_BGR2RGB) # instead of reading in image we take a live picture
+    capture = box_capture.reshape((capture.shape[0] * capture.shape[1],3))
 
 
     clt = KMeans(n_clusters=3) #cluster number
-    clt.fit(box_capture)
+    clt.fit(capture)
 
     hist = find_histogram(clt)
     bar = plot_colors2(hist, clt.cluster_centers_)
